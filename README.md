@@ -1,2 +1,2 @@
 # CGraphMaker
-A slick tool to easily make control graph and save time.
+A slick tool to save time when making control graph.
