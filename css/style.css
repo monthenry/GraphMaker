@@ -1,4 +1,66 @@
-.carre {
+/*
+-------------------------------------------------------------------------------
+Toolbar style
+-------------------------------------------------------------------------------
+*/
+
+html, body{
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+nav{
+  width: 100%;
+  height: 60px;
+  background-color: #FF846A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .logo{
+  font-size: 25px;
+  color: #FFFFFF;
+  margin-left: 20px;
+}
+
+nav .tools{
+  margin-right: 20px;
+}
+
+nav .tools button{
+  font-size: 30px;
+  color: #FFFFFF;
+  background-color: #FF846A;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+nav .tools button:hover{
+  color: #FF846A;
+  background-color: #FFFFFF;
+}
+
+/*
+-------------------------------------------------------------------------------
+Canvas style
+-------------------------------------------------------------------------------
+*/
+
+#canvas{
+  display: block;
+}
+
+/*
+-------------------------------------------------------------------------------
+Nodes style
+-------------------------------------------------------------------------------
+*/
+
+.square {
     display: flex;
     height: 100px;
     width: 100px;
@@ -20,7 +82,7 @@
     align-items: center;
 }
 
-.cercle {
+.circle {
     display: flex;
     width: 100px;
     height: 100px;
