@@ -1,5 +1,24 @@
 /*
 -------------------------------------------------------------------------------
+Infos
+-------------------------------------------------------------------------------
+
+Dark red :
+#FF4A23
+filter: invert(38%) sepia(48%) saturate(3872%) hue-rotate(346deg) brightness(100%) contrast(101%);
+
+Light red :
+#FF846A
+filter: invert(69%) sepia(42%) saturate(2603%) hue-rotate(316deg) brightness(102%) contrast(100%);
+
+White :
+#FFFFFF
+filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(99deg) brightness(107%) contrast(101%);
+
+*/
+
+/*
+-------------------------------------------------------------------------------
 Toolbar style
 -------------------------------------------------------------------------------
 */
@@ -37,6 +56,7 @@ nav .tools button{
   border: 1px solid #FFFFFF;
   border-radius: 5px;
   margin-left: 5px;
+  width: 40px;
 }
 
 nav .tools button:hover{
