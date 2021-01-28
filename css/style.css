@@ -90,6 +90,48 @@ Canvas style
 
 /*
 -------------------------------------------------------------------------------
+Text card style
+-------------------------------------------------------------------------------
+*/
+
+#inputBox{
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  border: 2px solid #FF846A;
+  border-radius: 10px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#inputBox textarea{
+  margin: 10px 0px;
+  resize: none;
+}
+
+#inputBox textarea:focus{
+  outline: 1px solid #FF846A;
+}
+
+#inputBox button{
+  margin-bottom: 10px;
+}
+
+#inputBoxHeader{
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #FF846A;
+  text-align: center;
+  padding: 5px 0px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+/*
+-------------------------------------------------------------------------------
 Nodes style
 -------------------------------------------------------------------------------
 */
@@ -134,4 +176,12 @@ Nodes style
     color: #FFFFFF;
     justify-content: center;
     align-items: center;
+}
+
+.nodeCaption{
+  white-space: pre-wrap;
+  height: 40px;
+  font-size: 16px;
+  line-height: 11px;
+  padding-left: 50px;
 }

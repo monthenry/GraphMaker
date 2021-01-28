@@ -32,6 +32,13 @@
 
     <!-- Part of the screen where the graph is being drawn -->
     <div id="canvas" onmousedown="canvasClick()">
+      <div id="inputBox">
+        <div id="inputBoxHeader">
+          Input node data here
+        </div>
+        <textarea name="node_text" rows="8" cols="20" id="inputField"></textarea>
+        <button type="button" name="button" id="inputButton" onclick="getCaption()">Save</button>
+      </div>
     </div>
   </body>
 </html>
