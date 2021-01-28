@@ -25,7 +25,9 @@ function canvasClick(){
   if (currentTool=="link") {
     console.log("Link creation");
   }else if (currentTool=="cursor") {
-    console.log("Mouse pointer interaction");
+    console.log("Mouse pointer mod");
+  }else if (currentTool=="eraser") {
+    console.log("Eraser mod")
   }else {
     addElement(currentTool);
   }
@@ -57,6 +59,7 @@ function addElement(className){
     newNode.style.position = "absolute";
     newNode.style.left = xPosNode+"px";
     newNode.style.top = yPosNode+"px";
+    newNode.addEventListener('click', remove, false);
     document.getElementById('canvas').appendChild(newNode);
 
     // node containing the text
@@ -82,6 +85,7 @@ function getCaption(){
   captionNode.style.left = xPosNode+"px";
   captionNode.style.top = yPosNode+"px";
   captionNode.innerHTML = captionValue;
+  captionNode.addEventListener('click', remove, false);
   document.getElementById('canvas').appendChild(captionNode);
 
   // node name incrementation
@@ -90,4 +94,10 @@ function getCaption(){
   document.getElementById('inputBox').style.display='none';
   document.getElementById('inputField').value='';
   editingMod=false;
+}
+
+function remove() {
+  if (currentTool=='eraser') {
+    this.remove();
+  }
 }
