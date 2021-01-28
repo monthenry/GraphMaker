@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="img/appLogo.png" />
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/435b4d5638.js" crossorigin="anonymous"></script>
     <script src="js/script.js" charset="utf-8"></script>
   </head>
   <body>
@@ -17,16 +18,16 @@
         <h1>CGraphMaker</h1>
       </div>
       <div class="tools">
-        <button type="button" name="circle" onclick="setTool('circle')"> &#9675; </button>
-        <button type="button" name="square" onclick="setTool('square')"> &#9633; </button>
-        <button type="button" name="diamond" onclick="setTool('diamond')"> &#9671; </button>
-        <button type="button" name="link"> &#9709; </button>
-        <button type="button" name="select"> &#8703; </button>
+        <button type="button" name="circle" id="button_circle" onclick="setTool('circle')"> <i class="far fa-circle"></i> </button>
+        <button type="button" name="square" id="button_square" onclick="setTool('square')"> <i class="far fa-square"></i> </button>
+        <button type="button" name="diamond" id="button_diamond" onclick="setTool('diamond')"> <i class="far fa-square rotated"></i> </button>
+        <button type="button" name="link" id="button_link" onclick="setTool('link')"> <i class="fas fa-project-diagram"></i> </button>
+        <button type="button" name="select" id="button_cursor" onclick="setTool('cursor')"> <i class="fas fa-mouse-pointer"></i> </button>
       </div>
     </nav>
 
     <!-- Part of the screen where the graph is being drawn -->
-    <div id="canvas" onmousedown="addElement()">
+    <div id="canvas" onmousedown="canvasClick()">
     </div>
   </body>
 </html>

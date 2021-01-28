@@ -57,12 +57,22 @@ nav .tools button{
   border: 1px solid #FFFFFF;
   border-radius: 5px;
   margin-left: 5px;
-  width: 40px;
+  min-width: 50px;
+  padding: 5px 0px;
 }
 
 nav .tools button:hover{
   color: #FF846A;
   background-color: #FFFFFF;
+}
+
+nav .tools button:focus{
+    outline: none;
+}
+
+.rotated {
+  transform: rotate(45deg);
+  font-size: 25px;
 }
 
 /*
