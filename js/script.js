@@ -5,11 +5,10 @@ var yPos=0;
 var xPosNode=0;
 var yPosNode=0;
 var editingMod=false;
+var linkBuilding=false;
 
-var x1Line=0;
-var y1Line=0;
-var x2Line=0;
-var y2Line=0;
+var x0Line=0;
+var y0Line=0;
 
 function setTool(toolName) {
   // check that the inputBox is not open before changing tool
@@ -32,17 +31,6 @@ onmousemove = function(e){
 // detect mouseclick and launch the appropriate function depending on tool used
 function canvasClick(){
   if (currentTool=="link") {
-    x1Line=xPos;
-    y1Line=yPos;
-
-    // continuous stroke mod
-    // if (Math.abs(x2Line-x1Line)<=50) {
-    //   x1Line=x2Line;
-    // }
-    // if (Math.abs(y2Line-y1Line)<=50) {
-    //   y1Line=y2Line;
-    // }
-
     console.log("Link creation");
   }else if (currentTool=="cursor") {
     console.log("Mouse pointer mod");
@@ -76,7 +64,7 @@ function addElement(className){
     newNode.style.position = "absolute";
     newNode.style.left = xPosNode+"px";
     newNode.style.top = yPosNode+"px";
-    newNode.addEventListener('click', remove, false);
+    newNode.addEventListener('click', elementTouched, false);
     document.getElementById('canvas').appendChild(newNode);
 
     // node containing the text
@@ -95,16 +83,18 @@ function addElement(className){
 function getCaption(){
   var captionValue=document.getElementById('inputField').value;
 
-  // caption node
-  var captionNode = document.createElement('div');
-  captionNode.className = 'nodeCaption';
-  captionNode.id = currentNodeName+"_caption";
-  captionNode.style.position = "absolute";
-  captionNode.style.left = xPosNode+"px";
-  captionNode.style.top = yPosNode+"px";
-  captionNode.innerHTML = captionValue;
-  captionNode.addEventListener('click', remove, false);
-  document.getElementById('canvas').appendChild(captionNode);
+  if (captionValue.length>0) {
+    // caption node
+    var captionNode = document.createElement('div');
+    captionNode.className = 'nodeCaption';
+    captionNode.id = currentNodeName+"_caption";
+    captionNode.style.position = "absolute";
+    captionNode.style.left = xPosNode+"px";
+    captionNode.style.top = yPosNode+"px";
+    captionNode.innerHTML = captionValue;
+    captionNode.addEventListener('click', elementTouched, false);
+    document.getElementById('canvas').appendChild(captionNode);
+  }
 
   // node name incrementation
   currentNodeName+=1;
@@ -114,47 +104,73 @@ function getCaption(){
   editingMod=false;
 }
 
-// erasing function (only if eraser activated)
-function remove() {
+// Element interaction on click
+function elementTouched() {
+  if (currentTool=='eraser') {
+    this.remove();
+  }else if (currentTool=='link') {
+    if (linkBuilding) {
+      drawLine(x0Line, y0Line, parseInt(this.style.left, 10)+20, parseInt(this.style.top, 10)+20);
+      linkBuilding=false;
+    }else {
+      x0Line=parseInt(this.style.left, 10)+20;
+      y0Line=parseInt(this.style.top, 10)+20;
+      linkBuilding=true;
+    }
+  }
+}
+
+// remove arrow function
+function removeArrow(){
   if (currentTool=='eraser') {
     this.remove();
   }
 }
 
-// drawing line between 2 points
+// drawing arrow between 2 points
 function drawLine(x1, y1, x2, y2){
-  var heightSvg=Math.abs(y2-y1)+3;
-  var widthSvg=Math.abs(x2-x1)+3;
+  // system offset due to toolbar
+  var systemOffset=85;
 
-  // create the svg element
-  var svgArrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  // calculating offset to not go over Elements
+  var offsetX1=0;
+  var offsetX2=0
+  var offsetY1=0;
+  var offsetY2=0
 
-  // set width and height
-  svgArrow.setAttribute("width", widthSvg.toString());
-  svgArrow.setAttribute("height", heightSvg.toString());
-  svgArrow.style.position = "absolute";
-  svgArrow.style.left = (Math.min(x1, x2)-2)+"px";
-  svgArrow.style.top = (Math.min(y1, y2)-2)+"px";
-
-  // create a line
-  var svgLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  svgLine.setAttribute("x1", (x1-Math.min(x1, x2)).toString());
-  svgLine.setAttribute("x2", (x2-Math.min(x1, x2)).toString());
-  svgLine.setAttribute("y1", (y1-Math.min(y1, y2)).toString());
-  svgLine.setAttribute("y2", (y2-Math.min(y1, y2)).toString());
-  svgLine.setAttribute("class", "arrow");
-
-  // attach it to the container
-  svgArrow.appendChild(svgLine);
-
-  // add arrow in canvas
-  document.getElementById("canvas").appendChild(svgArrow);
-}
-
-function lastPos(){
-  if (currentTool=="link") {
-    x2Line=xPos;
-    y2Line=yPos;
-    drawLine(x1Line, y1Line, x2Line, y2Line);
+  if (Math.abs(x2-x1)>Math.abs(y2-y1)) {
+    offsetX1=25;
+    offsetX2=offsetX1;
+    offsetY1=offsetX1/Math.abs(x2-x1)*Math.abs(y2-y1);
+    offsetY2=offsetY1;
+  }else {
+    offsetY1=25;
+    offsetY2=offsetY1;
+    offsetX1=offsetY1/Math.abs(y2-y1)*Math.abs(x2-x1);
+    offsetX2=offsetX1;
   }
+
+  if (x1>x2) {
+    offsetX1=-1*offsetX1;
+  }else {
+    offsetX2=-1*offsetX2;
+  }
+
+  if (y1>y2) {
+    offsetY1=-1*offsetY1;
+  }else {
+    offsetY2=-1*offsetY2;
+  }
+
+  // create an arrow
+  var svgLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  svgLine.setAttribute("x1", (x1+offsetX1).toString());
+  svgLine.setAttribute("x2", (x2+offsetX2).toString());
+  svgLine.setAttribute("y1", (y1+offsetY1-systemOffset).toString());
+  svgLine.setAttribute("y2", (y2+offsetY2-systemOffset).toString());
+  svgLine.setAttribute("class", "arrow");
+  svgLine.addEventListener('click', removeArrow, false);
+
+  // add arrow to svg container
+  document.getElementById("svgContainer").appendChild(svgLine);
 }
