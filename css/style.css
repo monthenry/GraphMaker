@@ -95,27 +95,33 @@ Nodes style
 */
 
 .square {
-    display: flex;
     height: 40px;
     width: 40px;
-    border: 1px solid #FF4A23;
-    background-color: #FF846A;
     color: #FFFFFF;
+    background-color: #FF846A;
+    border: 1px solid #FF4A23;
+    border-radius:5px;
+    display: flex;
     justify-content: center;
     align-items: center;
     /* -webkit-transform: rotate(45deg); to rotate */
 }
 
 .diamond {
-    display: flex;
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 100px solid #FF846A;
+    width:40px;
+    height:40px;
     color: #FFFFFF;
-    justify-content: center;
-    align-items: center;
+    background: #FF846A;
+    border: 1px solid #FF4A23;
+    border-radius:5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transform:rotate(45deg);
+}
+
+.diamond div {
+  transform:rotate(-45deg);
 }
 
 .circle {
@@ -128,21 +134,4 @@ Nodes style
     color: #FFFFFF;
     justify-content: center;
     align-items: center;
-}
-
-.losange {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background: #FF846A;
-  border: 2px solid #FF4A23;
-  padding:75px;
-  border-radius:10px;
-  transform:rotate(45deg);
-  width:50px;
-  height:50px;
-}
-
-.losange p {
-  transform:rotate(-45deg);
 }

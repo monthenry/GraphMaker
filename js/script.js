@@ -37,12 +37,21 @@ function selectButton(buttonId){
 function addElement(className){
     xPos=xPos-20;
     yPos=yPos-20;
+
+    // shape node
     var newNode = document.createElement('div');
     newNode.className = className;
-    newNode.innerHTML = String.fromCharCode(currentNodeName);
+    newNode.id = currentNodeName;
     newNode.style.position = "absolute";
     newNode.style.left = xPos+"px";
     newNode.style.top = yPos+"px";
     document.getElementById('canvas').appendChild(newNode);
+
+    // node containing the text
+    var innerNode = document.createElement('div');
+    innerNode.innerHTML = String.fromCharCode(currentNodeName);
+    document.getElementById(currentNodeName).appendChild(innerNode);
+
+    // node name incrementation
     currentNodeName+=1;
 }
