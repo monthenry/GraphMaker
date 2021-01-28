@@ -17,17 +17,16 @@
         <h1>CGraphMaker</h1>
       </div>
       <div class="tools">
-        <button type="button" name="circle"> &#9675; </button>
-        <button type="button" name="square"> &#9633; </button>
-        <button type="button" name="diamond"> &#9671; </button>
+        <button type="button" name="circle" onclick="setTool('circle')"> &#9675; </button>
+        <button type="button" name="square" onclick="setTool('square')"> &#9633; </button>
+        <button type="button" name="diamond" onclick="setTool('diamond')"> &#9671; </button>
         <button type="button" name="link"> &#9709; </button>
         <button type="button" name="select"> &#8703; </button>
       </div>
     </nav>
 
     <!-- Part of the screen where the graph is being drawn -->
-    <div id="canvas">
-
+    <div id="canvas" onmousedown="addElement()">
     </div>
   </body>
 </html>
