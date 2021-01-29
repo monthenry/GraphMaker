@@ -81,11 +81,14 @@ function addNode(className){
 function getCaption(){
   var captionValue=document.getElementById('inputField').value;
 
+  var nbLines=((captionValue.split(/\r\n|\r|\n/).length+1)/2|0);
+
   if (captionValue.length>0) {
     // caption creation
     var captionNode = document.createElement('div');
     if (linkBuilding) {
       captionNode.className = 'arrowCaption';
+      yPosLastElement-=nbLines*16;
     }else {
       captionNode.className = 'nodeCaption';
     }
@@ -204,8 +207,8 @@ function addArrow(x1, y1, x2, y2){
     document.getElementById("svgContainer").appendChild(svgLine);
 
     // calculating caption position
-    xPosLastElement=xPosLastElement+10;
-    yPosLastElement=yPosLastElement-(systemOffset/2|0);
+    xPosLastElement=xPosLastElement;
+    yPosLastElement=yPosLastElement;
   }
 
   // opening caption card
