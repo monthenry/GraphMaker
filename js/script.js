@@ -110,7 +110,7 @@ function elementTouched() {
     this.remove();
   }else if (currentTool=='link') {
     if (linkBuilding) {
-      drawLine(x0Line, y0Line, parseInt(this.style.left, 10)+20, parseInt(this.style.top, 10)+20);
+      addArrow(x0Line, y0Line, parseInt(this.style.left, 10)+20, parseInt(this.style.top, 10)+20);
       linkBuilding=false;
     }else {
       x0Line=parseInt(this.style.left, 10)+20;
@@ -120,17 +120,16 @@ function elementTouched() {
   }
 }
 
-// remove arrow function
-function removeArrow(){
-  if (currentTool=='eraser') {
-    this.remove();
-  }
-}
-
 // drawing arrow between 2 points
-function drawLine(x1, y1, x2, y2){
+function addArrow(x1, y1, x2, y2){
+  // calculating caption position
+  xPosNode=(x1+x2)/2;
+  yPosNode=(y1+y2)/2;
+
   // system offset due to toolbar
   var systemOffset=85;
+  y1=y1-systemOffset;
+  y2=y2-systemOffset;
 
   // calculating offset to not go over Elements
   var offsetX1=0;
@@ -162,15 +161,47 @@ function drawLine(x1, y1, x2, y2){
     offsetY2=-1*offsetY2;
   }
 
-  // create an arrow
-  var svgLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  svgLine.setAttribute("x1", (x1+offsetX1).toString());
-  svgLine.setAttribute("x2", (x2+offsetX2).toString());
-  svgLine.setAttribute("y1", (y1+offsetY1-systemOffset).toString());
-  svgLine.setAttribute("y2", (y2+offsetY2-systemOffset).toString());
-  svgLine.setAttribute("class", "arrow");
-  svgLine.addEventListener('click', removeArrow, false);
+  if (y2<(y1-25)) {
+    x1=x1-25;
+    x2=x2-25;
 
-  // add arrow to svg container
-  document.getElementById("svgContainer").appendChild(svgLine);
+    var xAnchor=Math.min(x1, x2);
+    var heightDiff=Math.abs(y1-y2);
+
+    // create curved arrow
+    var dPath="M"+x1+" "+y1+" C "+(xAnchor-(heightDiff/2|0))+" "+(y1-10)+", "+(xAnchor-(heightDiff/2|0))+" "+(y2+10)+", "+x2+" "+y2;
+    console.log(dPath);
+    var svgCurve = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    svgCurve.setAttribute("d", dPath);
+    svgCurve.setAttribute("fill", "transparent");
+    svgCurve.setAttribute("class", "arrow");
+    svgCurve.addEventListener('click', removeArrow, false);
+
+    // add curved arrow to svg container
+    document.getElementById("svgContainer").appendChild(svgCurve);
+  }else {
+    // create an arrow
+    var svgLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    svgLine.setAttribute("x1", (x1+offsetX1).toString());
+    svgLine.setAttribute("x2", (x2+offsetX2).toString());
+    svgLine.setAttribute("y1", (y1+offsetY1).toString());
+    svgLine.setAttribute("y2", (y2+offsetY2).toString());
+    svgLine.setAttribute("class", "arrow");
+    svgLine.addEventListener('click', removeArrow, false);
+
+    // add arrow to svg container
+    document.getElementById("svgContainer").appendChild(svgLine);
+  }
+
+  // opening caption card
+  document.getElementById('inputBox').style.display='flex';
+  setTool('cursor');
+  editingMod=true;
+}
+
+// remove arrow function
+function removeArrow(){
+  if (currentTool=='eraser') {
+    this.remove();
+  }
 }
