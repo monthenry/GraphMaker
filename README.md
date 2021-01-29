@@ -42,7 +42,7 @@ I might write a contributing guide if more people are interested in taking part 
 
 ## Contributors
 
-32DevStudio, alias Henry MONT
+32DevStudio, alias Henry MONT  
 Laurent NGETH
 
 ## License 
