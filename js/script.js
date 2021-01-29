@@ -2,13 +2,10 @@ var currentNodeName=97;
 var currentTool="cursor";
 var xPos=0;
 var yPos=0;
-var xPosNode=0;
-var yPosNode=0;
+var xPosLastElement=0;
+var yPosLastElement=0;
 var editingMod=false;
 var linkBuilding=false;
-
-var x0Line=0;
-var y0Line=0;
 
 function setTool(toolName) {
   // check that the inputBox is not open before changing tool
@@ -37,7 +34,7 @@ function canvasClick(){
   }else if (currentTool=="eraser") {
     console.log("Eraser mod")
   }else {
-    addElement(currentTool);
+    addNode(currentTool);
   }
 }
 
@@ -53,17 +50,17 @@ function selectButton(buttonId){
 }
 
 // create a new element (circle, square or diamond)
-function addElement(className){
-    xPosNode=xPos-20;
-    yPosNode=yPos-20;
+function addNode(className){
+    xPosLastElement=xPos-20;
+    yPosLastElement=yPos-20;
 
     // shape node
     var newNode = document.createElement('div');
     newNode.className = className;
     newNode.id = currentNodeName;
     newNode.style.position = "absolute";
-    newNode.style.left = xPosNode+"px";
-    newNode.style.top = yPosNode+"px";
+    newNode.style.left = xPosLastElement+"px";
+    newNode.style.top = yPosLastElement+"px";
     newNode.addEventListener('click', elementTouched, false);
     document.getElementById('canvas').appendChild(newNode);
 
@@ -74,6 +71,7 @@ function addElement(className){
     document.getElementById(currentNodeName).appendChild(innerNode);
 
     // opening caption card
+    xPosLastElement=xPosLastElement+45;
     document.getElementById('inputBox').style.display='flex';
     setTool('cursor');
     editingMod=true;
@@ -84,20 +82,30 @@ function getCaption(){
   var captionValue=document.getElementById('inputField').value;
 
   if (captionValue.length>0) {
-    // caption node
+    // caption creation
     var captionNode = document.createElement('div');
-    captionNode.className = 'nodeCaption';
+    if (linkBuilding) {
+      captionNode.className = 'arrowCaption';
+    }else {
+      captionNode.className = 'nodeCaption';
+    }
     captionNode.id = currentNodeName+"_caption";
     captionNode.style.position = "absolute";
-    captionNode.style.left = xPosNode+"px";
-    captionNode.style.top = yPosNode+"px";
+    captionNode.style.left = xPosLastElement+"px";
+    captionNode.style.top = yPosLastElement+"px";
     captionNode.innerHTML = captionValue;
     captionNode.addEventListener('click', elementTouched, false);
+
+
     document.getElementById('canvas').appendChild(captionNode);
   }
 
   // node name incrementation
-  currentNodeName+=1;
+  if (linkBuilding) {
+    linkBuilding=false;
+  }else {
+    currentNodeName+=1;
+  }
 
   document.getElementById('inputBox').style.display='none';
   document.getElementById('inputField').value='';
@@ -110,11 +118,10 @@ function elementTouched() {
     this.remove();
   }else if (currentTool=='link') {
     if (linkBuilding) {
-      addArrow(x0Line, y0Line, parseInt(this.style.left, 10)+20, parseInt(this.style.top, 10)+20);
-      linkBuilding=false;
+      addArrow(xPosLastElement, yPosLastElement, parseInt(this.style.left, 10)+20, parseInt(this.style.top, 10)+20);
     }else {
-      x0Line=parseInt(this.style.left, 10)+20;
-      y0Line=parseInt(this.style.top, 10)+20;
+      xPosLastElement=parseInt(this.style.left, 10)+20;
+      yPosLastElement=parseInt(this.style.top, 10)+20;
       linkBuilding=true;
     }
   }
@@ -123,8 +130,8 @@ function elementTouched() {
 // drawing arrow between 2 points
 function addArrow(x1, y1, x2, y2){
   // calculating caption position
-  xPosNode=(x1+x2)/2;
-  yPosNode=(y1+y2)/2;
+  xPosLastElement=(x1+x2)/2;
+  yPosLastElement=(y1+y2)/2;
 
   // system offset due to toolbar
   var systemOffset=85;
@@ -179,6 +186,10 @@ function addArrow(x1, y1, x2, y2){
 
     // add curved arrow to svg container
     document.getElementById("svgContainer").appendChild(svgCurve);
+
+    // calculating caption position
+    xPosLastElement=xAnchor-(heightDiff/2|0)+30;
+    yPosLastElement=yPosLastElement-(systemOffset/2|0);
   }else {
     // create an arrow
     var svgLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -191,6 +202,10 @@ function addArrow(x1, y1, x2, y2){
 
     // add arrow to svg container
     document.getElementById("svgContainer").appendChild(svgLine);
+
+    // calculating caption position
+    xPosLastElement=xPosLastElement+10;
+    yPosLastElement=yPosLastElement-(systemOffset/2|0);
   }
 
   // opening caption card
