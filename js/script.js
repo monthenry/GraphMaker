@@ -4,14 +4,18 @@ var xPos=0;
 var yPos=0;
 var xPosLastElement=0;
 var yPosLastElement=0;
+
+// status var
 var editingMod=false;
 var linkBuilding=false;
+var helpBoxToogled=false;
 
 function setTool(toolName) {
   // check that the inputBox is not open before changing tool
   if (!editingMod) {
     currentTool=toolName;
     selectButton("button_"+toolName);
+    setHelpHeader(toolName);
   }
 }
 
@@ -222,4 +226,21 @@ function removeArrow(){
   if (currentTool=='eraser') {
     this.remove();
   }
+}
+
+// toogle help window
+function toogleHelp(){
+  if (helpBoxToogled) {
+    document.getElementById('helpBox').style.display='none';
+    document.getElementById('helpButton').style.color='#FF846A';
+    helpBoxToogled=false;
+  }else {
+    document.getElementById('helpBox').style.display='flex';
+    document.getElementById('helpButton').style.color='#FFFFFF';
+    helpBoxToogled=true;
+  }
+}
+
+function setHelpHeader(value){
+  document.getElementById('helpBoxHeader').innerHTML="How to use : "+value;
 }

@@ -91,7 +91,7 @@ Canvas style
 
 /*
 -------------------------------------------------------------------------------
-Text card style
+Input Box Style
 -------------------------------------------------------------------------------
 */
 
@@ -129,6 +129,47 @@ Text card style
   text-align: center;
   padding: 5px 0px;
   border-radius: 5px 5px 0px 0px;
+}
+
+/*
+-------------------------------------------------------------------------------
+Help box style
+-------------------------------------------------------------------------------
+*/
+
+#helpBox{
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  border: 2px solid #FF846A;
+  border-radius: 10px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#helpBoxHeader{
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  color: #FFFFFF;
+  background-color: #FF846A;
+  text-align: center;
+  padding: 5px 0px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#helpButton{
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  font-size: 25px;
+  color: #FF684A;
+  background-color: transparent;
+  border: none;
 }
 
 /*
