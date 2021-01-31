@@ -1,8 +1,10 @@
 # CGraphMaker
 
+Use it <a href="https://32devstudio.github.io/">here</a> or clone the repositorie and use it locally.
+
 ## About the app
 
-A slick tool to save time when making control graph.
+A slick tool to save time when making control graph.  
 
 ## Existing features
 
