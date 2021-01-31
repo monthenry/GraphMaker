@@ -14,7 +14,7 @@ A slick tool to save time when making control graph.
 * square node
 * diamond node
 
-### arrow system to link node
+### arrow system to link nodes
 
 * straight arrow : linking a node with a node beneath
 * curved arrow : linking a node with a node above
