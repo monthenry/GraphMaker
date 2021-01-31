@@ -1,3 +1,9 @@
+// help messages
+const helpMessageShape="Once the node type is selected, click anywhere on the whiteboard to place it. \n A text area will pop-up, you can enter there the node caption or leave it blank and press save.";
+const helpMessageEdge="Once the edge mod selected, click on the two node you want to link, an edge will automatically be added. \n A text area will pop-up, you can enter there the edge caption or leave it blank and press save.";
+const helpMessageCursor="Once the cursor mod selected, you cannot perform any action. This is the default mod.";
+const helpMessageEraser="Once the eraser mod selected, you can click on any element previously added to delete it (nodes, edges and caption).";
+
 var currentNodeName=97;
 var currentTool="cursor";
 var xPos=0;
@@ -9,12 +15,19 @@ var yPosLastElement=0;
 var editingMod=false;
 var linkBuilding=false;
 var helpBoxToogled=false;
+var onForbiddenElement=false;
+
+// function executed on load
+function firstCall(){
+  setTool("cursor");
+}
 
 function setTool(toolName) {
   // check that the inputBox is not open before changing tool
   if (!editingMod) {
     currentTool=toolName;
     selectButton("button_"+toolName);
+    setHelpMessage(toolName);
     setHelpHeader(toolName);
   }
 }
@@ -32,12 +45,13 @@ onmousemove = function(e){
 // detect mouseclick and launch the appropriate function depending on tool used
 function canvasClick(){
   if (currentTool=="link") {
-    console.log("Link creation");
+    console.log("Link creation mod.");
   }else if (currentTool=="cursor") {
-    console.log("Mouse pointer mod");
+    console.log("Mouse pointer mod.");
   }else if (currentTool=="eraser") {
-    console.log("Eraser mod")
+    console.log("Eraser mod.")
   }else {
+    console.log("Node creation mod.")
     addNode(currentTool);
   }
 }
@@ -58,27 +72,32 @@ function addNode(className){
     xPosLastElement=xPos-20;
     yPosLastElement=yPos-20;
 
-    // shape node
-    var newNode = document.createElement('div');
-    newNode.className = className;
-    newNode.id = currentNodeName;
-    newNode.style.position = "absolute";
-    newNode.style.left = xPosLastElement+"px";
-    newNode.style.top = yPosLastElement+"px";
-    newNode.addEventListener('click', elementTouched, false);
-    document.getElementById('canvas').appendChild(newNode);
+    // area exclusion condition
+    if (onForbiddenElement) {
+      onForbiddenElement=false;
+    }else {
+      // shape node
+      var newNode = document.createElement('div');
+      newNode.className = className;
+      newNode.id = currentNodeName;
+      newNode.style.position = "absolute";
+      newNode.style.left = xPosLastElement+"px";
+      newNode.style.top = yPosLastElement+"px";
+      newNode.addEventListener('click', elementTouched, false);
+      document.getElementById('canvas').appendChild(newNode);
 
-    // node containing the text
-    var innerNode = document.createElement('div');
-    innerNode.className = 'unselectable';
-    innerNode.innerHTML = String.fromCharCode(currentNodeName);
-    document.getElementById(currentNodeName).appendChild(innerNode);
+      // node containing the text
+      var innerNode = document.createElement('div');
+      innerNode.className = 'unselectable';
+      innerNode.innerHTML = String.fromCharCode(currentNodeName);
+      document.getElementById(currentNodeName).appendChild(innerNode);
 
-    // opening caption card
-    xPosLastElement=xPosLastElement+45;
-    document.getElementById('inputBox').style.display='flex';
-    setTool('cursor');
-    editingMod=true;
+      // opening caption card
+      xPosLastElement=xPosLastElement+45;
+      document.getElementById('inputBox').style.display='flex';
+      setTool('cursor');
+      editingMod=true;
+    }
 }
 
 // create a caption for the recently added element
@@ -184,7 +203,6 @@ function addArrow(x1, y1, x2, y2){
 
     // create curved arrow
     var dPath="M"+x1+" "+y1+" C "+(xAnchor-(heightDiff/2|0))+" "+(y1-10)+", "+(xAnchor-(heightDiff/2|0))+" "+(y2+10)+", "+x2+" "+y2;
-    console.log(dPath);
     var svgCurve = document.createElementNS("http://www.w3.org/2000/svg", "path");
     svgCurve.setAttribute("d", dPath);
     svgCurve.setAttribute("fill", "transparent");
@@ -241,6 +259,25 @@ function toogleHelp(){
   }
 }
 
+// set help message depending on which tool is selected
+function setHelpMessage(toolName) {
+  if (toolName=="circle" || toolName=="square" || toolName=="diamond") {
+    document.getElementById('helpBoxContent').innerHTML=helpMessageShape;
+  }else if (toolName=="link") {
+    document.getElementById('helpBoxContent').innerHTML=helpMessageEdge;
+  }else if (toolName=="eraser") {
+    document.getElementById('helpBoxContent').innerHTML=helpMessageEraser;
+  }else {
+    document.getElementById('helpBoxContent').innerHTML=helpMessageCursor;
+  }
+}
+
 function setHelpHeader(value){
   document.getElementById('helpBoxHeader').innerHTML="How to use : "+value;
+}
+
+function clickBlock(){
+  if (currentTool=="circle" || currentTool=="square" || currentTool=="diamond") {
+    onForbiddenElement=true;
+  }
 }

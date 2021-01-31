@@ -101,6 +101,7 @@ Input Box Style
   position: absolute;
   top: 80px;
   left: 20px;
+  background-color: #FFFFFF;
   border: 2px solid #FF846A;
   border-radius: 10px;
   display: none;
@@ -139,10 +140,11 @@ Help box style
 
 #helpBox{
   width: 300px;
-  height: 150px;
+  height: auto;
   position: absolute;
   top: 70px;
   right: 10px;
+  background-color: #FFFFFF;
   border: 2px solid #FF846A;
   border-radius: 10px;
   display: none;
@@ -153,8 +155,6 @@ Help box style
 
 #helpBoxHeader{
   width: 100%;
-  position: absolute;
-  top: 0px;
   color: #FFFFFF;
   background-color: #FF846A;
   text-align: center;
@@ -170,6 +170,38 @@ Help box style
   color: #FF684A;
   background-color: transparent;
   border: none;
+}
+
+#helpBoxContent{
+  padding: 10px 10px;
+}
+
+/*
+-------------------------------------------------------------------------------
+Self Promotion
+-------------------------------------------------------------------------------
+*/
+
+#selfPromotion{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #FF684A;
+  background-color: #FFFFFF;
+  border: 1px solid #FF684A;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#selfPromotion:hover{
+  color: #FFFFFF;
+  background-color: #FF684A;
+  border: 1px solid #FF684A;
+}
+
+#selfPromotion a{
+  color: inherit;
+  text-decoration: none;
 }
 
 /*

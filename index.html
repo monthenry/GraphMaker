@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/all.min.css">
     <script src="js/all.min.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body onload="firstCall()">
     <!-- Toolbar -->
     <nav>
       <div class="logo">
@@ -40,10 +40,15 @@
         <button type="button" name="button" id="inputButton" onclick="getCaption()">Save</button>
       </div>
 
-      <div id="helpBox">
-        <div id="helpBoxHeader"> How to use : cursor </div>
+      <div id="helpBox" onmousedown="clickBlock()">
+        <div id="helpBoxHeader"></div>
+        <div id="helpBoxContent"></div>
       </div>
-      <button type="button" name="button" id="helpButton" onclick="toogleHelp()"><i class="far fa-question-circle"></i></button>
+      <button type="button" name="button" id="helpButton" onclick="toogleHelp()" onmousedown="clickBlock()"><i class="far fa-question-circle"></i></button>
+
+      <div id="selfPromotion" onmousedown="clickBlock()">
+        <a href="https://github.com/32devstudio/CGraphMaker"><i class="fas fa-star"></i> Star on Github</a>
+      </div>
 
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" id="svgContainer">
         <defs>
