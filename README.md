@@ -1,6 +1,6 @@
 # CGraphMaker
 
-Use it <a href="https://32devstudio.github.io/subsite/CGraphMaker/index.html">here</a> or clone the repositorie and use it locally.
+Use it <a href="https://32devstudio.github.io/subsite/CGraphMaker/index.html">here</a> or clone the repository and use it locally.
 
 ## About the app
 
