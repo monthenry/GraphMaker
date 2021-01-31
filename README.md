@@ -1,8 +1,10 @@
 # CGraphMaker
 
+Use it <a href="https://32devstudio.github.io/subsite/CGraphMaker/index.html">here</a> or clone the repository and use it locally.
+
 ## About the app
 
-A slick tool to save time when making control graph.
+A slick tool to save time when making control graph.  
 
 ## Existing features
 
@@ -12,7 +14,7 @@ A slick tool to save time when making control graph.
 * square node
 * diamond node
 
-### arrow system to link node
+### arrow system to link nodes
 
 * straight arrow : linking a node with a node beneath
 * curved arrow : linking a node with a node above
