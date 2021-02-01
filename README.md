@@ -36,6 +36,8 @@ neutral tool, no use for now
 3. possiblity to save a graph
 4. possibility to load and edit a save
 5. write/translate documentation
+6. make the screen scrollable for bigger graphs
+7. make a screenshot button that capture the entirety of the screen
 
 ## Contributing 
 
