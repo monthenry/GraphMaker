@@ -1,54 +1,58 @@
-# CGraphMaker
+# GraphMaker
 
-Use it <a href="https://monthenry.github.io/subsite/CGraphMaker/index.html">here</a> or clone the repository and use it locally.
+Welcome to **GraphMaker**, a powerful and user-friendly tool for creating control graphs effortlessly. Whether you're a developer, designer, or simply looking to visualize your ideas, GraphMaker provides the features you need to bring your concepts to life.
 
-## About the app
+## 🌟 Features
 
-A slick tool to save time when making control graph.  
+- **Versatile Node Types:** Choose from three distinct node shapes:
+  - **Circle**
+  - **Square**
+  - **Diamond**
 
-## Existing features
+- **Dynamic Linking:** Easily connect your nodes using:
+  - **Straight Arrows** for linking nodes below.
+  - **Curved Arrows** for linking nodes above.
 
-### 3 types of nodes
+- **Eraser Tool:** Simplify your editing process by removing:
+  - Nodes
+  - Text
+  - Arrows
 
-* circle node
-* square node
-* diamond node
+- **Cursor Tool:** A neutral mode currently available for future enhancements.
 
-### arrow system to link nodes
+## 🚀 Getting Started
 
-* straight arrow : linking a node with a node beneath
-* curved arrow : linking a node with a node above
+To start using GraphMaker, you can either use the online version or clone the repository for local use.
 
-### Eraser tool
+### Online Access
+[Access GraphMaker here](#) (insert link).
 
-* erase nodes
-* erase texts
-* erase arrows
+### Local Setup
 
-### Cursor tool
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/GraphMaker.git
+   cd GraphMaker
+   ```
 
-neutral tool, no use for now
+2. **Open the `index.html` file in your web browser.**
 
-## To do list
+## 🛠️ Roadmap
 
-1. possibility to grab a node and move it around with cursor
-2. arrows sticking to node when moved around
-3. possiblity to save a graph
-4. possibility to load and edit a save
-5. write/translate documentation
-6. make the screen scrollable for bigger graphs
-7. make a screenshot button that capture the entirety of the screen
+Here's what we plan to add next:
 
-## Contributing 
+- **Node Drag-and-Drop:** Enable users to move nodes freely around the canvas.
+- **Arrow Behavior:** Ensure arrows stick to their nodes during movement.
+- **Save and Load Graphs:** Implement functionality to save your graphs and load them for editing.
+- **Documentation:** Improve and translate documentation for a wider audience.
+- **Scrollable Canvas:** Make the canvas scrollable for accommodating larger graphs.
+- **Screenshot Functionality:** Add a button to capture the entire canvas as an image.
 
-Everyone is welcome to improve the app, write new functionality, add docs or even translate the readme. Just send a pull request.
-I might write a contributing guide if more people are interested in taking part in the developpment.
+## 👥 Contributors
 
-## Contributors
+- **Henry MONT**
+- **Laurent NGETH**
 
-Henry MONT    
-Laurent NGETH
+## 📄 License
 
-## License 
-
-This project is licensed under the GNU GPV v3.
+This project is licensed under the [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.html).
