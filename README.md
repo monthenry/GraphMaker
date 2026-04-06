@@ -25,7 +25,7 @@ Welcome to **GraphMaker**, a powerful and user-friendly tool for creating contro
 To start using GraphMaker, you can either use the online version or clone the repository for local use.
 
 ### Online Access
-[Access GraphMaker here](#) (insert link).
+The tool isn't hosted anymore, you need to download it and run it locally.
 
 ### Local Setup
 
